@@ -27,7 +27,7 @@ class Veiculo(models.Model):
     observacoes = models.TextField()
 
     def __str__(self):
-        return self.marca + ' - ' + self.placa
+        return self.marca.nome + ' - ' + self.placa
 
 
 class Parametros(models.Model):
@@ -36,3 +36,14 @@ class Parametros(models.Model):
 
     def __str__(self):
         return 'Parametros gerais'
+
+
+class MovRotativo(models.Model):
+    checkin = models.DateTimeField(auto_now=False)
+    checkout = models.DateTimeField(auto_now=False, blank=True, null=True)
+    valor_hora = models.DecimalField(max_digits=5, decimal_places=2)
+    veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
+    pago = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.veiculo.placa
