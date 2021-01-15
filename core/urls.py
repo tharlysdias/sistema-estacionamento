@@ -3,6 +3,7 @@ from django.conf.urls import url, include
 from .views import (
     home, 
     lista_pessoas, 
+    pessoa_novo,
     lista_veiculos,
     lista_movrotativos,
     lista_mensalista,
@@ -12,6 +13,7 @@ from .views import (
 urlpatterns = [
     url(r'^$', home, name='core_home'),
     url(r'^pessoas/$', lista_pessoas, name='core_lista_pessoas'),
+    url(r'^pessoas-novo/$', pessoa_novo, name='core_pessoa_novo'),
     url(r'^veiculos/$', lista_veiculos, name='core_lista_veiculos'),
     url(r'^mov-rot/$', lista_movrotativos, 
         name='core_lista_movrotativos'),

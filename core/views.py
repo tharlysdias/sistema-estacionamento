@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import (
     Pessoa, 
     Veiculo,
@@ -6,6 +6,8 @@ from .models import (
     Mensalista,
     MovMensalista
 )
+from .forms import PessoaForm
+
 
 # Create your views here.
 
@@ -14,16 +16,30 @@ def home(request):
     return render(request, 'core/index.html', context)
 
 
+# Função que lista pessoas
 def lista_pessoas(request):
     pessoas = Pessoa.objects.all()
-    return render(request, 'core/lista_pessoas.html', {'pessoas': pessoas})
+    form = PessoaForm()
+    data = {'pessoas': pessoas, 'form': form}
+    return render(request, 'core/lista_pessoas.html', data)
 
 
+# Função que recebe os dados do form
+def pessoa_novo(request):
+    form = PessoaForm(request.POST or None)
+    # Validação do formulário == obrigatório
+    if form.is_valid():
+        form.save()
+    return redirect('core_lista_pessoas')
+
+
+# Função que lista veiculos
 def lista_veiculos(request):
     veiculos = Veiculo.objects.all()
     return render(request, 'core/lista_veiculos.html', {'veiculos': veiculos})
 
 
+# Função que lista movimentos rotativos
 def lista_movrotativos(request):
     mov_rot = MovRotativo.objects.all()
     return render(
@@ -31,6 +47,7 @@ def lista_movrotativos(request):
     )
 
 
+# Função que lista clientes mensalistas
 def lista_mensalista(request):
     mensalistas = Mensalista.objects.all()
     return render(
@@ -38,6 +55,7 @@ def lista_mensalista(request):
     )
 
 
+# Função que lista movimentos dos clientes mensalistas
 def lista_movmensalista(request):
     mov_mensalistas = MovMensalista.objects.all()
     return render(
