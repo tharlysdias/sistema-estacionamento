@@ -5,3 +5,15 @@
         <li> {{ veiculo.placa }} </li>
     {% endfor %}
 </ul>
+
+
+<form action="{% url 'core_veiculo_novo' %}" method="POST">
+    {% comment %}
+        Faz o controle da segurança contra ataques do tipo csrf_token
+    {% endcomment %}
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Cadastrar</button>
+</form>

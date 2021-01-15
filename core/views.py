@@ -6,11 +6,11 @@ from .models import (
     Mensalista,
     MovMensalista
 )
-from .forms import PessoaForm
+from .forms import PessoaForm, VeiculoForm, MovRotativoForm
 
 
 # Create your views here.
-
+# Função para renderizar e testar
 def home(request):
     context = {'mensagem': 'Olá Mundo!'}
     return render(request, 'core/index.html', context)
@@ -36,15 +36,33 @@ def pessoa_novo(request):
 # Função que lista veiculos
 def lista_veiculos(request):
     veiculos = Veiculo.objects.all()
-    return render(request, 'core/lista_veiculos.html', {'veiculos': veiculos})
+    form = VeiculoForm()
+    data = {'veiculos': veiculos, 'form': form}
+    return render(request, 'core/lista_veiculos.html', data)
+
+
+def veiculo_novo(request):
+    form = VeiculoForm(request.POST or None)
+    # Validação do formulário == obrigatório
+    if form.is_valid():
+        form.save()
+    return redirect('core_lista_veiculos')
 
 
 # Função que lista movimentos rotativos
 def lista_movrotativos(request):
     mov_rot = MovRotativo.objects.all()
+    form = MovRotativoForm()
+    data = {'form': form, 'mov_rot': mov_rot}
     return render(
-        request, 'core/lista_movrotativos.html', {'mov_rot': mov_rot}
-    )
+        request, 'core/lista_movrotativos.html', data)
+
+
+def movrotativos_novo(request):
+    form = MovRotativoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    return redirect('core_lista_movrotativos')
 
 
 # Função que lista clientes mensalistas
