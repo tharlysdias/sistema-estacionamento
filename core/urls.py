@@ -6,6 +6,7 @@ from .views import (
     lista_pessoas, 
     pessoa_novo,
     pessoa_update,
+    pessoa_delete,
 
     # Veiculos
     lista_veiculos,
@@ -24,7 +25,8 @@ from .views import (
 
     # Movimentos mensalistas
     lista_movmensalista,
-    movmensalista_novo
+    movmensalista_novo,
+    movmensalista_update,
     )
 
 urlpatterns = [
@@ -33,6 +35,7 @@ urlpatterns = [
     url(r'^pessoas/$', lista_pessoas, name='core_lista_pessoas'),
     url(r'^pessoa-novo/$', pessoa_novo, name='core_pessoa_novo'),
     url(r'^pessoa-update/(?P<id>\d+)/$', pessoa_update, name='core_pessoa_update'),
+    url(r'^pessoa-delete/(?P<id>\d+)/$', pessoa_delete, name='core_pessoa_delete'),
 
     url(r'^veiculos/$', lista_veiculos, name='core_lista_veiculos'),
     url(r'^veiculo-novo/$', veiculo_novo, name='core_veiculo_novo'),
@@ -48,4 +51,5 @@ urlpatterns = [
 
     url(r'^mov-mensal/$', lista_movmensalista, name='core_lista_movmensalista'),
     url(r'^mov-mensal-novo/$', movmensalista_novo, name='core_movmensalista_novo'),
+    url(r'^mov-mensal-update/(?P<id>\d+)/$', movmensalista_update, name='core_movmensalista_update'),
 ]

@@ -57,6 +57,17 @@ def pessoa_update(request, id):
         return render(request, 'core/update_pessoa.html', data)
 
 
+def pessoa_delete(request, id):
+    # Recupera a informação do banco
+    pessoa = Pessoa.objects.get(id=id)
+
+    if request.method == 'POST':
+        pessoa.delete()
+        return redirect('core_lista_pessoas')
+    else:
+        return render(request, 'core/delete_confirm.html', {'pessoa': pessoa})
+
+
 # Função que lista veiculos
 def lista_veiculos(request):
     veiculos = Veiculo.objects.all()
@@ -161,3 +172,18 @@ def movmensalista_novo(request):
     if form.is_valid():
         form.save()
     return redirect('core_lista_movmensalista')
+
+
+def movmensalista_update(request, id):
+    data = {}
+    mov_mensalista = MovMensalista.objects.get(id=id)
+    form = MovMensalistaForm(request.POST or None, instance=mov_mensalista)
+    data['mov_mensalista'] = mov_mensalista
+    data['form'] = form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('core_lista_movmensalista')
+    else:
+        return render(request, 'core/update_movmensalista.html', data)
