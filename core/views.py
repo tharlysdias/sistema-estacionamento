@@ -103,6 +103,21 @@ def movrotativos_novo(request):
     return redirect('core_lista_movrotativos')
 
 
+def movrotativos_update(request, id):
+    data = {}
+    mov_rotativo = MovRotativo.objects.get(id=id)
+    form = MovRotativoForm(request.POST or None, instance=mov_rotativo)
+    data['mov_rotativo'] = mov_rotativo
+    data['form'] = form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('core_lista_movrotativos')
+    else:
+        return render(request, 'core/update_movrotativos.html', data)
+
+
 # Função que lista clientes mensalistas
 def lista_mensalista(request):
     mensalistas = Mensalista.objects.all()

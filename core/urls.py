@@ -2,20 +2,26 @@ from django.urls import path
 from django.conf.urls import url, include
 from .views import (
     home, 
+    # Pessoas
     lista_pessoas, 
     pessoa_novo,
     pessoa_update,
 
+    # Veiculos
     lista_veiculos,
     veiculo_novo,
     veiculo_update,
 
+    # Movimentos Rotativos
     lista_movrotativos,
     movrotativos_novo,
+    movrotativos_update,
 
+    # Mensalista
     lista_mensalista,
     mensalista_novo,
 
+    # Movimentos mensalistas
     lista_movmensalista,
     movmensalista_novo
     )
@@ -33,6 +39,7 @@ urlpatterns = [
 
     url(r'^mov-rot/$', lista_movrotativos, name='core_lista_movrotativos'),
     url(r'^mov-rot-novo/$', movrotativos_novo, name='core_movrotativos_novo'),
+    url(r'^mov-rot-update/(?P<id>\d+)/$', movrotativos_update, name='core_movrotativos_update'),
 
     url(r'^mensalistas/$', lista_mensalista, name='core_lista_mensalista'),
     url(r'^mensalista-novo/$', mensalista_novo, name='core_mensalista_novo'),
