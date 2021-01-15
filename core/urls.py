@@ -8,6 +8,7 @@ from .views import (
 
     lista_veiculos,
     veiculo_novo,
+    veiculo_update,
 
     lista_movrotativos,
     movrotativos_novo,
@@ -28,6 +29,7 @@ urlpatterns = [
 
     url(r'^veiculos/$', lista_veiculos, name='core_lista_veiculos'),
     url(r'^veiculo-novo/$', veiculo_novo, name='core_veiculo_novo'),
+    url(r'^veiculo-update/(?P<id>\d+)/$', veiculo_update, name='core_veiculo_update'),
 
     url(r'^mov-rot/$', lista_movrotativos, name='core_lista_movrotativos'),
     url(r'^mov-rot-novo/$', movrotativos_novo, name='core_movrotativos_novo'),
