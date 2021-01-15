@@ -6,7 +6,12 @@ from .models import (
     Mensalista,
     MovMensalista
 )
-from .forms import PessoaForm, VeiculoForm, MovRotativoForm
+from .forms import (
+    PessoaForm, 
+    VeiculoForm, 
+    MovRotativoForm, 
+    MensalistaForm
+)
 
 
 # Create your views here.
@@ -68,9 +73,17 @@ def movrotativos_novo(request):
 # Função que lista clientes mensalistas
 def lista_mensalista(request):
     mensalistas = Mensalista.objects.all()
+    form = MensalistaForm()
+    data = {'mensalistas': mensalistas, 'form': form}
     return render(
-        request, 'core/lista_mensalistas.html', {'mensalistas': mensalistas}
-    )
+        request, 'core/lista_mensalistas.html', data)
+
+
+def mensalista_novo(request):
+    form = MensalistaForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    return redirect('core_lista_mensalista')
 
 
 # Função que lista movimentos dos clientes mensalistas
