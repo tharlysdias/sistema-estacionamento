@@ -30,13 +30,28 @@ def lista_pessoas(request):
     return render(request, 'core/lista_pessoas.html', data)
 
 
-# Função que recebe os dados do form
+# Função que recebe os novos dados do form
 def pessoa_novo(request):
     form = PessoaForm(request.POST or None)
     # Validação do formulário == obrigatório
     if form.is_valid():
         form.save()
     return redirect('core_lista_pessoas')
+
+
+def pessoa_update(request, id):
+    data = {}
+    pessoa = Pessoa.objects.get(id=id)
+    form = PessoaForm(request.POST or None, instance=pessoa)
+    data['pessoa'] = pessoa
+    data['form'] = form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('core_lista_pessoas')
+    else:
+        return render(request, 'core/update_pessoa.html', data)
 
 
 # Função que lista veiculos

@@ -4,6 +4,7 @@ from .views import (
     home, 
     lista_pessoas, 
     pessoa_novo,
+    pessoa_update,
 
     lista_veiculos,
     veiculo_novo,
@@ -23,6 +24,7 @@ urlpatterns = [
 
     url(r'^pessoas/$', lista_pessoas, name='core_lista_pessoas'),
     url(r'^pessoa-novo/$', pessoa_novo, name='core_pessoa_novo'),
+    url(r'^pessoa-update/(?P<id>\d+)/$', pessoa_update, name='core_pessoa_update'),
 
     url(r'^veiculos/$', lista_veiculos, name='core_lista_veiculos'),
     url(r'^veiculo-novo/$', veiculo_novo, name='core_veiculo_novo'),
