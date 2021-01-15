@@ -20,6 +20,7 @@ from .views import (
     # Mensalista
     lista_mensalista,
     mensalista_novo,
+    mensalista_update,
 
     # Movimentos mensalistas
     lista_movmensalista,
@@ -43,6 +44,7 @@ urlpatterns = [
 
     url(r'^mensalistas/$', lista_mensalista, name='core_lista_mensalista'),
     url(r'^mensalista-novo/$', mensalista_novo, name='core_mensalista_novo'),
+    url(r'^mensalista-update/(?P<id>\d+)/$', mensalista_update, name='core_mensalista_update'),
 
     url(r'^mov-mensal/$', lista_movmensalista, name='core_lista_movmensalista'),
     url(r'^mov-mensal-novo/$', movmensalista_novo, name='core_movmensalista_novo'),
