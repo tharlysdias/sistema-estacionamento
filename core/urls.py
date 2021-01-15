@@ -3,18 +3,19 @@ from django.conf.urls import url, include
 from .views import (
     home, 
     lista_pessoas, 
-    
     pessoa_novo,
-    veiculo_novo,
-    movrotativos_novo,
-    mensalista_novo,
 
     lista_veiculos,
+    veiculo_novo,
 
     lista_movrotativos,
+    movrotativos_novo,
 
     lista_mensalista,
-    lista_movmensalista
+    mensalista_novo,
+
+    lista_movmensalista,
+    movmensalista_novo
     )
 
 urlpatterns = [
@@ -32,6 +33,6 @@ urlpatterns = [
     url(r'^mensalistas/$', lista_mensalista, name='core_lista_mensalista'),
     url(r'^mensalista-novo/$', mensalista_novo, name='core_mensalista_novo'),
 
-    url(r'^mov-mensal/$', lista_movmensalista, 
-        name='core_lista_movmensalista'),
+    url(r'^mov-mensal/$', lista_movmensalista, name='core_lista_movmensalista'),
+    url(r'^mov-mensal-novo/$', movmensalista_novo, name='core_movmensalista_novo'),
 ]

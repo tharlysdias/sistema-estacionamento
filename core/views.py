@@ -10,7 +10,8 @@ from .forms import (
     PessoaForm, 
     VeiculoForm, 
     MovRotativoForm, 
-    MensalistaForm
+    MensalistaForm,
+    MovMensalistaForm
 )
 
 
@@ -59,8 +60,7 @@ def lista_movrotativos(request):
     mov_rot = MovRotativo.objects.all()
     form = MovRotativoForm()
     data = {'form': form, 'mov_rot': mov_rot}
-    return render(
-        request, 'core/lista_movrotativos.html', data)
+    return render(request, 'core/lista_movrotativos.html', data)
 
 
 def movrotativos_novo(request):
@@ -75,8 +75,7 @@ def lista_mensalista(request):
     mensalistas = Mensalista.objects.all()
     form = MensalistaForm()
     data = {'mensalistas': mensalistas, 'form': form}
-    return render(
-        request, 'core/lista_mensalistas.html', data)
+    return render(request, 'core/lista_mensalistas.html', data)
 
 
 def mensalista_novo(request):
@@ -89,7 +88,13 @@ def mensalista_novo(request):
 # Função que lista movimentos dos clientes mensalistas
 def lista_movmensalista(request):
     mov_mensalistas = MovMensalista.objects.all()
-    return render(
-        request, 'core/lista_movmensalistas.html', 
-        {'mov_mensalistas': mov_mensalistas}
-    )
+    form = MovMensalistaForm()
+    data = {'mov_mensalistas': mov_mensalistas, 'form': form}
+    return render(request, 'core/lista_movmensalistas.html', data)
+
+
+def movmensalista_novo(request):
+    form = MovMensalistaForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    return redirect('core_lista_movmensalista')
